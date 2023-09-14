@@ -1,0 +1,12 @@
+import React from 'react'
+
+const Button = () => {
+  return (
+    <div>
+      <button>boop</button>
+    </div>
+  )
+}
+
+export default Button
+ 
