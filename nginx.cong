@@ -1,0 +1,92 @@
+events {
+    worker_connections 1024;
+}
+
+http {
+    # Configuration for the Next app
+    server {
+        server_name mynext.creatohive.com;
+
+        location / {
+            proxy_pass http://localhost:3000;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+
+    listen 80;
+
+}
+
+    # Configuration for the React app
+    server {
+        server_name myreact.creatohive.com;
+
+        location / {
+            proxy_pass http://localhost:3001;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+
+    listen 80;
+
+}
+
+    # Configuration for the Express backend
+    server {
+        server_name myexpress.creatohive.com;
+
+        location / {
+            proxy_pass http://localhost:3002;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+
+    listen 80;
+
+}
+
+    server {
+    if ($host = myexpress.creatohive.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+        listen 80;
+        server_name myexpress.creatohive.com;
+    return 404; # managed by Certbot
+
+
+}
+    server {
+    if ($host = mynext.creatohive.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+        listen 80;
+        server_name mynext.creatohive.com;
+    return 404; # managed by Certbot
+
+
+}
+    server {
+    if ($host = myreact.creatohive.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+        listen 80;
+        server_name myreact.creatohive.com;
+    return 404; # managed by Certbot
+
+
+}}
