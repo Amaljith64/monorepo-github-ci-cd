@@ -6,4 +6,4 @@ git pull origin master
 source ~/.bashrc
 yarn build
 pm2 stop next
-pm2 start npm --name "next" -- run "start:next
+pm2 start npm --name "next" -- run "start:next"
